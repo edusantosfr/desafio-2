@@ -16,9 +16,13 @@ export function Login() {
         setStatus(true);
 
         try {
-            const response = await API.get(`/${inputValue}`);
-            console.log(response.data)
-            return response.data;
+            const responseUser = await API.get(`/${inputValue}`);
+            const responseRepos = await API.get(`/${inputValue}/repos`);
+            console.log(responseUser.data)
+            const userData = responseUser.data
+            console.log(responseRepos.data)
+            const reposData = responseRepos.data
+
         } catch (error) {
             console.error("Erro ao fazer login", error);
         } finally {
@@ -46,7 +50,7 @@ export function Login() {
                     <h1 className="text-[40px] font-bold text-[#303030]">Entrar</h1>
                     <div className="flex flex-col">
                         <label htmlFor="userName" className="text-[#303030] text-[15px]">Usuário</label>
-                        <input type="text" name="userName" required placeholder="Digite aqui seu usuário do Github" className="w-[318px] p-2.5 pl-3.5 color-[#B5B5B5] text-[15px] border-[1px] border-[#B5B5B5] rounded-sm"
+                        <input id="userName" type="text" required placeholder="Digite aqui seu usuário do Github" className="w-[318px] p-2.5 pl-3.5 color-[#B5B5B5] text-[15px] border-[1px] border-[#B5B5B5] rounded-sm"
                             onChange={(e) => setInputValue(e.target.value)}
                         />
                     </div>
