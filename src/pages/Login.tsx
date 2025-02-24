@@ -1,28 +1,24 @@
 import logo from "../assets/logo-name.png";
 
-import loadingCenter from "../assets/loading-center.png"
-import loadingAround from "../assets/loading-around.png"
+import loadingCenter from "../assets/loading-center.png";
+import loadingAround from "../assets/loading-around.png";
 
 import { useState } from "react";
 
-import { API } from "../services/api";
+import { getUsers } from "../services/user.service";
+import { getUsersRepos } from "../services/repos.service";
 
 export function Login() {
 
     const [status, setStatus] = useState(false);
-    const [inputValue, setInputValue] = useState("");
+    const [inputValue, setInputValue] = useState<string>("");
 
     async function loadingLogin() {
         setStatus(true);
 
         try {
-            const responseUser = await API.get(`/${inputValue}`);
-            const responseRepos = await API.get(`/${inputValue}/repos`);
-            console.log(responseUser.data)
-            const userData = responseUser.data
-            console.log(responseRepos.data)
-            const reposData = responseRepos.data
-
+            console.log(getUsers(inputValue));
+            console.log(getUsersRepos(inputValue));
         } catch (error) {
             console.error("Erro ao fazer login", error);
         } finally {
