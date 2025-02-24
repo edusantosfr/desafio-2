@@ -9,27 +9,9 @@ import { LoadingSpinner } from "../components/loadingSpinner";
 import { getUsers } from "../services/user.service";
 import { getUsersRepos } from "../services/repos.service";
 
-interface User {
-    name: string;
-    bio: string;
-    avatar: string;
-}
-
-interface UserRepos {
-    id: number;
-    name: string;
-    description: string;
-    url: string;
-    visibility: string;
-    language: string;
-}
-
 export function Login() {
     const navigate = useNavigate();
     const { setUser } = useUser();
-
-    const [users, setUsers] = useState<User[]>([]);
-    const [usersRepos, setUsersRepos] = useState<UserRepos[]>([]);
 
     const [status, setStatus] = useState(false);
     const [inputValue, setInputValue] = useState<string>("");
@@ -37,20 +19,17 @@ export function Login() {
     async function loadingLogin() {
         try {
             setStatus(true);
+            
             const responseUser = await getUsers(inputValue)
-
             const data = responseUser
-
             const selectedUser = {
                 name: data.login,
                 bio: data.bio,
                 avatar: data.avatar_url
             };
-
-            setUsers([selectedUser])
+            setUser([selectedUser])
 
             const responseUserRepos = await getUsersRepos(inputValue)
-            setUsersRepos(responseUserRepos)
 
             navigate("./Profile")
         } catch (error) {

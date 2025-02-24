@@ -17,15 +17,15 @@ export function Profile() {
                         <div className="flex flex-col gap-10">
                             <h1 className="text-[30px] font-bold text-[#303030]">Informações do Perfil</h1>
                             <div className="flex flex-row max-w-fit min-w-[600px] max-h-fit border-1 border-[#E3E7EB] p-[24px] rounded-[18px] gap-[40px]">
-                                <img className="w-[120px] h-[120px] rounded-[11px] shrink-0" src="dasd" alt="imagem do perfil do usuário" />
+                                <img className="w-[120px] h-[120px] rounded-[11px] shrink-0" src={user[0]?.avatar} alt="imagem do perfil do usuário" />
                                 <div className="flex flex-col gap-2">
                                     <div>
                                         <span className="font-normal text-[13px] text-[#6A6F73]">Nome</span>
-                                        <h3 className="font-bold text-[15px] text-[#2D2D2D]">fdf</h3>
+                                        <h3 className="font-bold text-[15px] text-[#2D2D2D]">{user[0]?.name}</h3>
                                     </div>
                                     <div>
                                         <span className="font-normal text-[13px] text-[#6A6F73]">Bio</span>
-                                        <p className="font-normal text-[15px] text-[#2D2D2D]">{user[0].bio}</p>
+                                        <p className="font-normal text-[15px] text-[#2D2D2D]">{user[0]?.bio || "Sem Bibliografia"}</p>
                                     </div>
                                 </div>
                             </div>
