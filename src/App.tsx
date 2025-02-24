@@ -1,9 +1,18 @@
 import { Login } from "./pages/Login"
+import { Routes, BrowserRouter, Route } from "react-router-dom"
 import { Profile } from "./pages/Profile"
+import { UserProvider } from "./contexts/UserContext"
 
 function App() {
   return (
-    <Login />
+    <UserProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/Profile" element={<Profile />} />
+        </Routes>
+      </BrowserRouter>
+    </UserProvider>
   )
 }
 

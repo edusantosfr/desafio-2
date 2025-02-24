@@ -1,6 +1,9 @@
 import logo from "../assets/logo-blue.png";
+import { ReposCard } from "../components/reposCard";
+import { useUser } from "../contexts/UserContext";
 
 export function Profile() {
+    const { user } = useUser();
     return (
         <div className="grid grid-rows-[88px_90.7vh] h-screen">
             <section className="bg-white flex justify-center">
@@ -14,15 +17,15 @@ export function Profile() {
                         <div className="flex flex-col gap-10">
                             <h1 className="text-[30px] font-bold text-[#303030]">Informações do Perfil</h1>
                             <div className="flex flex-row max-w-fit min-w-[600px] max-h-fit border-1 border-[#E3E7EB] p-[24px] rounded-[18px] gap-[40px]">
-                                <div className="bg-blue-400 w-[120px] h-[120px] rounded-[11px] shrink-0"></div>
+                                <img className="w-[120px] h-[120px] rounded-[11px] shrink-0" src="dasd" alt="imagem do perfil do usuário" />
                                 <div className="flex flex-col gap-2">
                                     <div>
                                         <span className="font-normal text-[13px] text-[#6A6F73]">Nome</span>
-                                        <h3 className="font-bold text-[15px] text-[#2D2D2D]">Eduardo</h3>
+                                        <h3 className="font-bold text-[15px] text-[#2D2D2D]">fdf</h3>
                                     </div>
                                     <div>
                                         <span className="font-normal text-[13px] text-[#6A6F73]">Bio</span>
-                                        <p className="font-normal text-[15px] text-[#2D2D2D]">Bibliografia</p>
+                                        <p className="font-normal text-[15px] text-[#2D2D2D]">{user[0].bio}</p>
                                     </div>
                                 </div>
                             </div>
@@ -30,63 +33,9 @@ export function Profile() {
                         <div className="flex flex-col gap-10 pb-2">
                             <h1 className="text-[30px] font-bold text-[#303030]">Repositórios</h1>
                             <div className="flex gap-8">
-                                <div className="w-[340px] h-[280px] rounded-[10px] shadow-[0_0_20px_rgba(0,0,0,0.20)] grid grid-rows-[70px_210px]">
-                                    <div className="flex items-center justify-center border-b-1 border-[#0070E0]">
-                                        <div className="w-[80%]">
-                                            <h3 className="flex font-bold text-[#202E49]">Repositório</h3>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center justify-center">
-                                        <div className="w-[80%] flex flex-col gap-5">
-                                            <div className="bg-[#F7F7F7] w-[100%] h-[60px] rounded-[11px] flex flex-col justify-center">
-                                                <span className="font-normal text-[12px] text-[#6A6F73] pl-5">Link</span>
-                                                <p className="font-medium text-[14px] text-[#202E49] underline pl-5">www.link.com.br</p>
-                                            </div>
-                                            <div className="bg-[#F7F7F7] w-[100%] h-[60px] rounded-[11px] flex flex-col justify-center">
-                                                <span className="font-normal text-[12px] text-[#6A6F73] pl-5">Link</span>
-                                                <p className="font-medium text-[14px] text-[#202E49] pl-5">Lorem ipsum dolor...</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="w-[365px] h-[280px] rounded-[10px] shadow-[0_0_20px_rgba(0,0,0,0.20)] grid grid-rows-[70px_210px]">
-                                    <div className="flex items-center justify-center border-b-1 border-[#0070E0]">
-                                        <div className="w-[80%]">
-                                            <h3 className="flex font-bold text-[#202E49]">Repositório</h3>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center justify-center">
-                                        <div className="w-[80%] flex flex-col gap-5">
-                                            <div className="bg-[#F7F7F7] w-[100%] h-[60px] rounded-[11px] flex flex-col justify-center">
-                                                <span className="font-normal text-[12px] text-[#6A6F73] pl-5">Link</span>
-                                                <p className="font-medium text-[14px] text-[#202E49] underline pl-5">www.link.com.br</p>
-                                            </div>
-                                            <div className="bg-[#F7F7F7] w-[100%] h-[60px] rounded-[11px] flex flex-col justify-center">
-                                                <span className="font-normal text-[12px] text-[#6A6F73] pl-5">Link</span>
-                                                <p className="font-medium text-[14px] text-[#202E49] pl-5">Lorem ipsum dolor...</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="w-[365px] h-[280px] rounded-[10px] shadow-[0_0_20px_rgba(0,0,0,0.20)] grid grid-rows-[70px_210px]">
-                                    <div className="flex items-center justify-center border-b-1 border-[#0070E0]">
-                                        <div className="w-[80%]">
-                                            <h3 className="flex font-bold text-[#202E49]">Repositório</h3>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center justify-center">
-                                        <div className="w-[80%] flex flex-col gap-5">
-                                            <div className="bg-[#F7F7F7] w-[100%] h-[60px] rounded-[11px] flex flex-col justify-center">
-                                                <span className="font-normal text-[12px] text-[#6A6F73] pl-5">Link</span>
-                                                <p className="font-medium text-[14px] text-[#202E49] underline pl-5">www.link.com.br</p>
-                                            </div>
-                                            <div className="bg-[#F7F7F7] w-[100%] h-[60px] rounded-[11px] flex flex-col justify-center">
-                                                <span className="font-normal text-[12px] text-[#6A6F73] pl-5">Link</span>
-                                                <p className="font-medium text-[14px] text-[#202E49] pl-5">Lorem ipsum dolor...</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <ReposCard />
+                                <ReposCard />
+                                <ReposCard />
                             </div>
                         </div>
                     </div>

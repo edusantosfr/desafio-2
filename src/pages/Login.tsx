@@ -1,28 +1,62 @@
 import logo from "../assets/logo-name.png";
 
-import loadingCenter from "../assets/loading-center.png";
-import loadingAround from "../assets/loading-around.png";
-
 import { useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../contexts/UserContext";
+
+import { LoadingSpinner } from "../components/loadingSpinner";
 import { getUsers } from "../services/user.service";
 import { getUsersRepos } from "../services/repos.service";
 
+interface User {
+    name: string;
+    bio: string;
+    avatar: string;
+}
+
+interface UserRepos {
+    id: number;
+    name: string;
+    description: string;
+    url: string;
+    visibility: string;
+    language: string;
+}
+
 export function Login() {
+    const navigate = useNavigate();
+    const { setUser } = useUser();
+
+    const [users, setUsers] = useState<User[]>([]);
+    const [usersRepos, setUsersRepos] = useState<UserRepos[]>([]);
 
     const [status, setStatus] = useState(false);
     const [inputValue, setInputValue] = useState<string>("");
 
     async function loadingLogin() {
-        setStatus(true);
-
         try {
-            console.log(getUsers(inputValue));
-            console.log(getUsersRepos(inputValue));
+            setStatus(true);
+            const responseUser = await getUsers(inputValue)
+
+            const data = responseUser
+
+            const selectedUser = {
+                name: data.login,
+                bio: data.bio,
+                avatar: data.avatar_url
+            };
+
+            setUsers([selectedUser])
+
+            const responseUserRepos = await getUsersRepos(inputValue)
+            setUsersRepos(responseUserRepos)
+
+            navigate("./Profile")
         } catch (error) {
-            console.error("Erro ao fazer login", error);
+            console.error("Erro ao fazer login", error)
         } finally {
-            setStatus(false);
+            setStatus(false)
         }
     };
 
@@ -32,15 +66,7 @@ export function Login() {
                 <img src={logo} alt="logo imagem" />
             </section>
             {status ? (
-                <section className="flex flex-col items-center justify-center gap-10">
-                    <div className="flex items-center justify-center">
-                        <img src={loadingCenter} alt="" className="absolute animate-spin" />
-                        <img src={loadingAround} alt="" className="object-cover animate-spin" />
-                    </div>
-                    <div className="flex flex-row">
-                        <h1 className="font-bold text-[30px] text-[#303030]">Carregando...</h1>
-                    </div>
-                </section>
+                <LoadingSpinner />
             ) : (
                 <section className="flex flex-col items-center justify-center gap-10">
                     <h1 className="text-[40px] font-bold text-[#303030]">Entrar</h1>
