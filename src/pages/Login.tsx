@@ -11,7 +11,7 @@ import { getUsersRepos } from "../services/repos.service";
 
 export function Login() {
     const navigate = useNavigate();
-    const { setUser } = useUser();
+    const { setUser, setRepository } = useUser();
 
     const [status, setStatus] = useState(false);
     const [inputValue, setInputValue] = useState<string>("");
@@ -19,17 +19,27 @@ export function Login() {
     async function loadingLogin() {
         try {
             setStatus(true);
-            
+
             const responseUser = await getUsers(inputValue)
-            const data = responseUser
+            const userData = responseUser
             const selectedUser = {
-                name: data.login,
-                bio: data.bio,
-                avatar: data.avatar_url
+                name: userData.login,
+                bio: userData.bio,
+                avatar: userData.avatar_url
             };
             setUser([selectedUser])
 
             const responseUserRepos = await getUsersRepos(inputValue)
+            const reposData = responseUserRepos
+            const selectedRepos = reposData.map((repos: any) => ({
+                id: repos.id,
+                name: repos.name,
+                description: repos.description,
+                visibility: repos.visibility,
+                url: repos.html_url,
+                language: repos.language
+            }));
+            setRepository(selectedRepos)
 
             navigate("./Profile")
         } catch (error) {

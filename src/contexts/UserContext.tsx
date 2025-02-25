@@ -1,23 +1,35 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
-type User = {
+interface User {
   name: string;
   bio: string;
   avatar: string;
-};
+}
 
-type UserContextType = {
-  user: User[];
-  setUser: (user: User[]) => void;
-};
+interface Repository {
+  id: number;
+  name: string;
+  description: string;
+  visibility: string;
+  url: string;
+  language: string;
+}
+
+interface UserContextType {
+  user: User[];  
+  repos: Repository[];  
+  setUser: React.Dispatch<React.SetStateAction<User[]>>;
+  setRepository: React.Dispatch<React.SetStateAction<Repository[]>>;
+}
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User[]>([]);
+  const [repos, setRepository] = useState<Repository[]>([]);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, repos, setRepository }}>
       {children}
     </UserContext.Provider>
   );
@@ -26,7 +38,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 export const useUser = () => {
   const context = useContext(UserContext);
   if (!context) {
-    throw new Error("useUsuario deve ser usado dentro de um UsuarioProvider");
+    throw new Error("useUser deve ser usado dentro de um UserProvider");
   }
   return context;
 };
