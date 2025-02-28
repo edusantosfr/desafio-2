@@ -1,9 +1,11 @@
 import logo from "../assets/logo-blue.png";
+
 import { ReposCard } from "../components/reposCard";
 import { useUser } from "../contexts/UserContext";
 
 export function Profile() {
     const { user } = useUser();
+
     return (
         <div className="grid grid-rows-[88px_90.7vh] h-screen">
             <section className="bg-white flex justify-center">
@@ -30,13 +32,9 @@ export function Profile() {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex flex-col gap-10 pb-2">
+                        <div className="flex flex-col gap-1 pb-2">
                             <h1 className="text-[30px] font-bold text-[#303030]">Repositórios</h1>
-                            <div className="flex gap-8">
-                                <ReposCard />
-                                <ReposCard />
-                                <ReposCard />
-                            </div>
+                            <ReposCard />
                         </div>
                     </div>
                 </div>
