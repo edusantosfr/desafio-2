@@ -1,9 +1,10 @@
 import logo from "../assets/logo-name.png";
+import errorCard from "../assets/errorCard.png"
 
 import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../contexts/UserContext";
+import { useUser } from "../context/UserContext";
 
 import { LoadingSpinner } from "../components/loadingSpinner";
 import { getUsers } from "../services/user.service";
@@ -14,11 +15,16 @@ export function Login() {
     const { setUser, setRepository } = useUser();
 
     const [status, setStatus] = useState(false);
+    const [verify, setVerify] = useState(false);
     const [inputValue, setInputValue] = useState<string>("");
+
+    const handleClick = () => {
+        setVerify(false)
+    };
 
     async function loadingLogin() {
         try {
-            setStatus(true);
+            setStatus(true)
 
             const responseUser = await getUsers(inputValue)
             const userData = responseUser
@@ -43,7 +49,7 @@ export function Login() {
 
             navigate("./Profile")
         } catch (error) {
-            console.error("Erro ao fazer login", error)
+            setVerify(true)
         } finally {
             setStatus(false)
         }
@@ -58,7 +64,15 @@ export function Login() {
                 <LoadingSpinner />
             ) : (
                 <section className="flex flex-col items-center justify-center gap-10">
-                    <h1 className="text-[40px] font-bold text-[#303030]">Entrar</h1>
+                    {verify ? (
+                        <div className="flex justify-end items-center">
+                            <p className="absolute mb-3.5 mr-[17px] text-white cursor-pointer text-[13px]"
+                                onClick={() => handleClick()}>X</p>
+                            <img src={errorCard} className="object-cover w-[347px]" alt="card de erro" />
+                        </div>
+                    ) : (
+                        <h1 className="text-[40px] font-bold text-[#303030]">Entrar</h1>
+                    )}
                     <div className="flex flex-col">
                         <label htmlFor="userName" className="text-[#303030] text-[15px]">Usuário</label>
                         <input id="userName" type="text" required placeholder="Digite aqui seu usuário do Github" className="w-[318px] p-2.5 pl-3.5 color-[#B5B5B5] text-[15px] border-[1px] border-[#B5B5B5] rounded-sm"
