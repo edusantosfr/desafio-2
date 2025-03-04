@@ -140,8 +140,8 @@ export function Profile() {
                             <div className="flex flex-col xl:gap-10
                             lg:gap-4
                             md:gap-10">
-                                <h1 className="xl:text-[30px] font-bold text-[#303030]
-                                lg:text-[20px]
+                                <h1 className="xl:text-[30px] font-bold text-[#303030] xl:ml-0
+                                lg:text-[20px] lg:ml-0
                                 md:text-[30px] md:ml-6">Informações do Perfil</h1>
                                 <div className="flex flex-row max-w-fit min-w-[600px] max-h-fit border-1 border-[#E3E7EB] xl:p-[24px] rounded-[18px] gap-[40px]
                                 lg:p-[18px]
@@ -169,11 +169,11 @@ export function Profile() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex flex-col gap-1 pb-2">
-                                <h1 className="xl:text-[30px] font-bold xl:text-[#303030]
-                                lg:text-[20px]
+                            <div className="flex flex-col gap-1">
+                                <h1 className="xl:text-[30px] font-bold xl:text-[#303030] xl:ml-0
+                                lg:text-[20px] lg:ml-0
                                 md:text-[30px] md:ml-6">Repositórios</h1>
-                                <div className="flex flex-col xl:gap-3
+                                <div className="flex flex-col xl:gap:0
                                 lg:gap-1
                                 md:gap-3">
                                     <div className="flex flex-row justify-end items-center gap-5">
@@ -196,7 +196,7 @@ export function Profile() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="flex overflow-x-auto scroll-smooth snap-x snap-mandatory xl:w-[85vw] p-[1vw]
+                                    <div className="flex overflow-x-auto scroll-smooth snap-x snap-mandatory xl:w-[85vw]
                                     lg:w-[85vw]
                                     md:w-[85vw]" ref={carousel}>
                                         {repos.map((repos) => (
@@ -209,7 +209,9 @@ export function Profile() {
                                                         lg:h-[240px] lg:w-[calc((81vw)/3)] 
                                                         md:h-[300px] md:w-[calc((79vw)/3)]"
                                                             onClick={() => openModal(repos.id)}>
-                                                            <div className="flex items-center justify-center border-b-1 border-[#0070E0] md:w-[calc((79vw)/3)]" >
+                                                            <div className="flex items-center justify-center border-b-1 border-[#0070E0] xl:w-[100%]
+                                                            lg:w-[100%]
+                                                            md:w-[calc((79vw)/3)]" >
                                                                 <div className="w-[80%]" >
                                                                     <h3 className="flex font-bold text-[#202E49] w-[100%] truncate xl:text-[15px]
                                                                     lg:text-[13px]" >{repos.name}</h3>

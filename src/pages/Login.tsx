@@ -72,7 +72,9 @@ export function Login() {
                         <div className="flex justify-end items-center">
                             <p className="absolute mb-3.5 mr-[17px] text-white cursor-pointer text-[13px]"
                                 onClick={() => handleClick()}>X</p>
-                            <img src={errorCard} className="object-cover w-[347px]" alt="card de erro" />
+                            <img src={errorCard} className="object-cover xl:w-[347px]
+                            lg:w-[347px]
+                            md:w-[417px]" alt="card de erro" />
                         </div>
                     ) : (
                         <h1 className="text-[40px] font-bold text-[#303030]">Entrar</h1>
