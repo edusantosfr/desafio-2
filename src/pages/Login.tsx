@@ -1,7 +1,7 @@
 import logo from "../assets/logo-name.png";
 import errorCard from "../assets/errorCard.png"
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext";
@@ -9,10 +9,12 @@ import { useUser } from "../context/UserContext";
 import { LoadingSpinner } from "../components/loadingSpinner";
 import { getUsers } from "../services/user.service";
 import { getUsersRepos } from "../services/repos.service";
+import { AuthContext } from "../context/AuthContext";
 
 export function Login() {
     const navigate = useNavigate();
     const { setUser, setRepository } = useUser();
+    const { setIsAuthenticated } = useContext(AuthContext);
 
     const [status, setStatus] = useState(false);
     const [verify, setVerify] = useState(false);
@@ -46,6 +48,7 @@ export function Login() {
                 language: repos.language
             }));
             setRepository(selectedRepos)
+            setIsAuthenticated(true)
 
             navigate("./Profile")
         } catch (error) {

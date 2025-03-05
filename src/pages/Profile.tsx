@@ -5,13 +5,15 @@ import arrow from "../assets/arrow.svg";
 import { useUser } from "../context/UserContext";
 import { LoadingSpinner } from "../components/loadingSpinner";
 
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 export function Profile() {
     const { user } = useUser()
     const { repos } = useUser()
     const navigate = useNavigate();
+    const { setIsAuthenticated } = useContext(AuthContext);
 
     const carousel = useRef<HTMLDivElement | null>(null)
 
@@ -55,8 +57,11 @@ export function Profile() {
         <div className="grid grid-rows-[10vh_90vh]">
             <section className="bg-white flex justify-center items-center">
                 <div className="flex items-center w-[92%]">
-                    <img className="h-[3vh]" src={logo} alt="logo imagem" 
-                    onClick= {() => navigate("../")}/>
+                    <img className="h-[3vh] cursor-pointer" src={logo} alt="logo imagem"
+                        onClick={() => {
+                            setIsAuthenticated(false)
+                            navigate("../")
+                        }} />
                 </div>
             </section>
             <section className="bg-[#f5f5f5] flex items-center justify-center">
